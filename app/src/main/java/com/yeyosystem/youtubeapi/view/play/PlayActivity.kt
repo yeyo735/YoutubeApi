@@ -4,8 +4,6 @@ import android.os.Bundle
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
-import com.google.android.youtube.player.YouTubePlayer.PlaybackEventListener
-import com.google.android.youtube.player.YouTubePlayer.PlayerStateChangeListener
 import com.yeyosystem.youtubeapi.R
 import com.yeyosystem.youtubeapi.tools.Constants
 import com.yeyosystem.youtubeapi.tools.showShortToast
@@ -64,7 +62,7 @@ class PlayActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener 
         if (!wasRestored) {
             player?.cueVideo(viewModel.videoId)
         }
-        listeners()
+        viewModel.listeners()
     }
 
     override fun onInitializationFailure(
@@ -72,30 +70,5 @@ class PlayActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener 
         p1: YouTubeInitializationResult?
     ) {
         showShortToast("Youtube Api Initialization Failure")
-    }
-
-    private fun listeners() {
-        viewModel.player?.let {
-            it.setPlayerStateChangeListener(object : PlayerStateChangeListener {
-                override fun onAdStarted() {}
-                override fun onError(arg0: YouTubePlayer.ErrorReason) {}
-                override fun onLoaded(arg0: String) {
-                    it.setFullscreen(true)
-                    it.play()
-                }
-
-                override fun onLoading() {}
-                override fun onVideoEnded() {}
-                override fun onVideoStarted() {}
-            })
-
-            it.setPlaybackEventListener(object : PlaybackEventListener {
-                override fun onBuffering(arg0: Boolean) {}
-                override fun onPaused() {}
-                override fun onPlaying() {}
-                override fun onSeekTo(arg0: Int) {}
-                override fun onStopped() {}
-            })
-        }
     }
 }

@@ -7,6 +7,7 @@ import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.gson.GsonFactory
 import com.yeyosystem.youtubeapi.R
 import com.yeyosystem.youtubeapi.tools.BaseActivity
+import com.yeyosystem.youtubeapi.view.list.ListActivity
 import com.yeyosystem.youtubeapi.view.play.PlayActivity
 
 class MainActivity : BaseActivity() {
@@ -18,7 +19,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val intent = Intent(this, PlayActivity::class.java)
+        val intent = Intent(this, ListActivity::class.java)
         startActivity(intent)
     }
 }
